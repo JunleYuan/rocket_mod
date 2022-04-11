@@ -14,6 +14,7 @@ class Play extends Phaser.Scene {
 
     create() {
         this.cur_time = 0;
+        this.sound.play('sfx_background');
 
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
@@ -110,12 +111,12 @@ class Play extends Phaser.Scene {
     
         // check key input for restart / menu
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
-            delta = 0;
-            
+            this.game.sound.stopAll();
             this.scene.restart();
         }
 
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.game.sound.stopAll();
             this.scene.start("menuScene");
         }
 
