@@ -3,20 +3,24 @@ class Play extends Phaser.Scene {
         super("playScene");
     }
 
+    
+
     preload() {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/CoreFighter2.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('pilot', './assets/pilot.png');
+        this.load.image('boom', './assets/boom.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 100, frameHeight: 60, startFrame: 0, endFrame: 4});
     }
 
+    
+
     create() {
         this.cur_time = 0;
         this.sound.play('sfx_background');
-
 
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
@@ -61,7 +65,7 @@ class Play extends Phaser.Scene {
         this.anims.create({
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 4, first: 0}),
-            frameRate: 20
+            frameRate: 10
         });
 
         // initialize score
@@ -114,6 +118,18 @@ class Play extends Phaser.Scene {
 
         }, null, this);
 
+        var particles = this.add.particles('boom');
+
+        this.emitter = particles.createEmitter({
+            x: 100,
+            y: 100,
+            speed: 400,
+            frequency: 100,
+            angle: { min: -30, max: 30 },
+            quantity: 0,
+            lifespan: { min: 100, max: 300 },
+            blendMode: 'ADD'
+        });
         
         
     }
@@ -172,6 +188,13 @@ class Play extends Phaser.Scene {
     }
 
     shipExplode(ship) {
+
+        this.emitter.setPosition(ship.x+ship.width/2, ship.y+ship.height/2);
+
+        this.emitter.setQuantity(.1);
+        
+        this.clock = this.time.delayedCall(500, () => {this.emitter.setQuantity(0);}, null, this);
+    
         // temporarily hide ship
         ship.alpha = 0;                         
         // create explosion sprite at ship's position
@@ -187,5 +210,8 @@ class Play extends Phaser.Scene {
         this.scoreLeft.text = "Score:" + this.p1Score; 
         
         this.sound.play('sfx_explosion');
+        
+        
+
       }
 }
