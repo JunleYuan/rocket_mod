@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/CoreFighter2.png');
         this.load.image('starfield', './assets/starfield.png');
+        this.load.image('pilot', './assets/pilot.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 100, frameHeight: 60, startFrame: 0, endFrame: 4});
     }
@@ -16,35 +17,39 @@ class Play extends Phaser.Scene {
         this.cur_time = 0;
         this.sound.play('sfx_background');
 
+
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
         //starfield
         // green UI background
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+        //this.add.rectangle(0, borderUISize, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
         // white borders
-        this.r1 = this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        this.r1.depth = 2;
+        //this.r1 = this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+        //this.r1.depth = 2;
 
-        this.r2 =this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        this.r2.depth = 2;
+        //this.r2 =this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+        //this.r2.depth = 2;
 
-        this.r3 =this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        this.r3.depth = 2;
+        //this.r3 =this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        //this.r3.depth = 2;
 
-        this.r4 =this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        this.r4.depth = 2;
+        //this.r4 =this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        //this.r4.depth = 2;
 
         // add Rocket (p1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+        this.p1Rocket = new Rocket(this, 480,344, 'rocket').setOrigin(0.5, 0);
 
         // add Spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, 80, 'spaceship', 0, 100).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, 80*2, 'spaceship', 0, 50).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, 80*3, 'spaceship', 0, 10).setOrigin(0,0);
-        this.ship01.setScale(1.2);
-        this.ship02.setScale(1.2);
+        this.ship01 = new Spaceship(this, game.config.width, 80, 'spaceship', 0, 100).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, 80*1.6, 'spaceship', 0, 50).setOrigin(0,0);
+        this.ship03 = new Spaceship(this, game.config.width + borderUISize*6, 80*2.3, 'spaceship', 0, 10).setOrigin(0,0);
+        this.ship01.setScale(0.8);
+        //this.ship02.setScale(1);
         this.ship03.setScale(1.2);
 
+        //pilot screen
+        this.pilot = this.add.sprite(0, 0, 'pilot').setOrigin(0,0);
+        this.pilot.depth = 2;
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -66,7 +71,7 @@ class Play extends Phaser.Scene {
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '24px',
-            backgroundColor: '#F3B141',
+            //backgroundColor: '#F3B141',
             color: '#843605',
             align: 'right',
             padding: {
@@ -75,11 +80,11 @@ class Play extends Phaser.Scene {
             },
             //fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, "Score:"+ this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding,game.config.height- borderUISize*4, "Score:"+ this.p1Score, scoreConfig);
         
         //var time = new Date();
-        this.see_delta = this.add.text(170, borderUISize + borderPadding*2, "delta", scoreConfig);
-        this.see_time = this.add.text(game.config.width-250,borderUISize + borderPadding*2, "HighScore:" + high_score, scoreConfig);
+        this.see_delta = this.add.text(borderUISize + borderPadding, game.config.height - borderUISize*5, "delta", scoreConfig);
+        this.see_time = this.add.text(borderUISize + borderPadding,game.config.height - borderUISize*6, "HighScore:" + high_score, scoreConfig);
         // GAME OVER flag
         this.gameOver = false;
 
