@@ -15,7 +15,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
     update() {
         // left/right movement
-        console.log(this.cur_time/1000);
+        //console.log(this.cur_time/1000);
         this.cur_time++;
 
         

@@ -105,6 +105,15 @@ class Play extends Phaser.Scene {
 
             }, null, this);
         }
+
+        this.clock = this.time.delayedCall(30000, () => {
+            
+            game.settings.spaceshipSpeed = game.settings.spaceshipSpeed+2;
+            
+            
+
+        }, null, this);
+
         
         
     }
