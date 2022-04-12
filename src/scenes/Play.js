@@ -88,9 +88,7 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
             
-
         }, null, this);
-
 
         for(let i = 1; i <= game.settings.gameTimer/1000; i++){
 
