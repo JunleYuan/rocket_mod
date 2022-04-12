@@ -6,7 +6,7 @@ class Play extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
-        this.load.image('spaceship', './assets/CoreFighter.png');
+        this.load.image('spaceship', './assets/CoreFighter2.png');
         this.load.image('starfield', './assets/starfield.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 100, frameHeight: 60, startFrame: 0, endFrame: 4});
@@ -38,11 +38,14 @@ class Play extends Phaser.Scene {
         this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
 
         // add Spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
-        
-        
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, 80, 'spaceship', 0, 100).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, 80*2, 'spaceship', 0, 50).setOrigin(0,0);
+        this.ship03 = new Spaceship(this, game.config.width, 80*3, 'spaceship', 0, 10).setOrigin(0,0);
+        this.ship01.setScale(1.2);
+        this.ship02.setScale(1.2);
+        this.ship03.setScale(1.2);
+
+
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -103,7 +106,6 @@ class Play extends Phaser.Scene {
 
     update(delta) {
 
-        
         if(60 - this.cur_time < 61)
         this.see_delta.text = "Time left:"+ (game.settings.gameTimer/1000 - this.cur_time); 
     
@@ -143,7 +145,7 @@ class Play extends Phaser.Scene {
         }
     }
 
-    checkCollision(rocket, ship) {
+    checkCollision(rocket, ship,scale) {
         // simple AABB checking
         if (rocket.x < ship.x + ship.width && 
             rocket.x + rocket.width > ship.x && 
