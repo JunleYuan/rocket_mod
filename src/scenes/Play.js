@@ -65,7 +65,7 @@ class Play extends Phaser.Scene {
         this.anims.create({
             key: 'explode',
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 4, first: 0}),
-            frameRate: 10
+            frameRate: 5
         });
 
         // initialize score
