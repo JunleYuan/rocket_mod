@@ -5,15 +5,20 @@ class Menu extends Phaser.Scene {
 
   preload() {
     // load audio
-    this.load.audio('sfx_select', './assets/blip_select12.wav');
+    this.load.audio('sfx_select', './assets/click.wav');
     this.load.audio('sfx_explosion', './assets/explosion.wav');
     this.load.audio('sfx_rocket', './assets/shoot.wav');
     this.load.audio('sfx_background', './assets/background.mp3');
+    //load IMG
     this.load.spritesheet('space', './assets/space.png', { frameWidth: game.config.width, frameHeight: game.config.height, startFrame: 0, endFrame: 2 });
+    this.load.bitmapFont('bm', 'assets/bm_0.png', 'assets/bm.xml');
+    
   }
 
+  
   create() {
-
+  
+    //background
     this.anims.create({
       key: 'earth',
       frames: this.anims.generateFrameNumbers('space', { start: 0, end: 1, first: 0 }),
@@ -25,32 +30,22 @@ class Menu extends Phaser.Scene {
       backg.anims.play('earth');
     });
 
-
-    // menu text configuration
-    let menuConfig = {
-      fontFamily: 'Gill Sans',
-      fontSize: '40px',
-      //backgroundColor: '#F3B141',
-      color: '#843605',
-      align: 'right',
-      padding: {
-        top: 5,
-        bottom: 5,
-      },
-      fixedWidth: 0
-    }
+    //text
+    this.add.bitmapText(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding - 100, 'bm','Char\'s Revenge',34).setOrigin(0.5);
+    this.add.bitmapText(game.config.width / 2, 180, 'bm','(F) to fire',34).setOrigin(0.5);
 
     //Easy button setting
-    let easy_butt = this.add.text(game.config.width / 2, 250, 'Easy Mode', { fontFamily: "Comic Sans", fontSize: '48px',color: '#0f0' }).setOrigin(0.5);;
+    let easy_butt = this.add.bitmapText(game.config.width / 2, 250, 'bm','Easy Mode',34).setOrigin(0.5);
+    //let easy_butt = this.add.text(game.config.width / 2, 250, 'Easy Mode', { fontFamily: "Comic Sans", fontSize: '48px',color: '#0f0' }).setOrigin(0.5);
     easy_butt.setInteractive();
 
     easy_butt.on('pointerover', () => {
-      easy_butt.setColor('#0000FF')
-
+      easy_butt.setScale(1.2);
+      
     });
 
     easy_butt.on('pointerout', () => {
-      easy_butt.setColor('#0f0')
+      easy_butt.setScale(1);
 
     });
 
@@ -61,20 +56,21 @@ class Menu extends Phaser.Scene {
         gameTimer: 60000
       }
       this.sound.play('sfx_select');
-      this.scene.start("playScene");
+
+      this.clock = this.time.delayedCall(1000, () => {this.scene.start("playScene");}, null, this);
     });
 
     //Hard button setting
-    let hard_butt = this.add.text(game.config.width / 2, 300, 'Hard Mode', { fontFamily: "Comic Sans",fontSize: '48px', color: '#0f0' }).setOrigin(0.5);;
+    let hard_butt = this.add.bitmapText(game.config.width / 2, 300, 'bm','Hard Mode',34).setOrigin(0.5).setOrigin(0.5);
     hard_butt.setInteractive();
 
     hard_butt.on('pointerover', () => {
-      hard_butt.setColor('#0000FF')
+      hard_butt.setScale(1.2);
 
     });
 
     hard_butt.on('pointerout', () => {
-      hard_butt.setColor('#0f0')
+      hard_butt.setScale(1);
 
     });
 
@@ -85,14 +81,13 @@ class Menu extends Phaser.Scene {
         gameTimer: 45000
       }
       this.sound.play('sfx_select');
-      this.scene.start("playScene");
+      this.clock = this.time.delayedCall(1000, () => {this.scene.start("playScene");}, null, this);
     });
 
-    // show menu text
-    this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding - 100, 'Char\'s Revenge', menuConfig).setOrigin(0.5);
-    this.add.text(game.config.width / 2, 180, '(F) to fire', menuConfig).setOrigin(0.5);
-    menuConfig.backgroundColor = '#00FF00';
-    menuConfig.color = '#000';
+    
+    
+    //menuConfig.backgroundColor = '#00FF00';
+    //menuConfig.color = '#000';
 
   }
 
