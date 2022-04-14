@@ -41,7 +41,7 @@ class Menu extends Phaser.Scene {
     }
 
     //Easy button setting
-    let easy_butt = this.add.text(game.config.width / 2, 300, 'Easy Mode', { fontFamily: "Gill Sans", color: '#0f0' }).setOrigin(0.5);;
+    let easy_butt = this.add.text(game.config.width / 2, 250, 'Easy Mode', { fontFamily: "Comic Sans", fontSize: '48px',color: '#0f0' }).setOrigin(0.5);;
     easy_butt.setInteractive();
 
     easy_butt.on('pointerover', () => {
@@ -64,8 +64,8 @@ class Menu extends Phaser.Scene {
       this.scene.start("playScene");
     });
 
-    //Easy button setting
-    let hard_butt = this.add.text(game.config.width / 2, 350, 'Hard Mode', { fontFamily: "Gill Sans", color: '#0f0' }).setOrigin(0.5);;
+    //Hard button setting
+    let hard_butt = this.add.text(game.config.width / 2, 300, 'Hard Mode', { fontFamily: "Comic Sans",fontSize: '48px', color: '#0f0' }).setOrigin(0.5);;
     hard_butt.setInteractive();
 
     hard_butt.on('pointerover', () => {
@@ -90,7 +90,7 @@ class Menu extends Phaser.Scene {
 
     // show menu text
     this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding - 100, 'Char\'s Revenge', menuConfig).setOrigin(0.5);
-    this.add.text(game.config.width / 2, game.config.height / 2, '(F) to fire', menuConfig).setOrigin(0.5);
+    this.add.text(game.config.width / 2, 180, '(F) to fire', menuConfig).setOrigin(0.5);
     menuConfig.backgroundColor = '#00FF00';
     menuConfig.color = '#000';
 
