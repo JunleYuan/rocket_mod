@@ -96,6 +96,7 @@ class Play extends Phaser.Scene {
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             if (this.p1Score > high_score) high_score = this.p1Score;
+            game.settings.spaceshipSpeed = game.settings.spaceshipSpeed-2;
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
