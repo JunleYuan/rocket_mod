@@ -24,23 +24,7 @@ class Play extends Phaser.Scene {
 
         // place tile sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
-        //starfield
-        // green UI background
-        //this.add.rectangle(0, borderUISize, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
-        // white borders
-        //this.r1 = this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        //this.r1.depth = 2;
-
-        //this.r2 =this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        //this.r2.depth = 2;
-
-        //this.r3 =this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        //this.r3.depth = 2;
-
-        //this.r4 =this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        //this.r4.depth = 2;
-
-        // add Rocket (p1)
+        
         this.p1Rocket = new Rocket(this, 480,342, 'rocket').setOrigin(0.5, 0);
 
         // add Spaceships (x3)
@@ -58,8 +42,10 @@ class Play extends Phaser.Scene {
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        
+    
 
         // animation config
         this.anims.create({
@@ -131,11 +117,15 @@ class Play extends Phaser.Scene {
             lifespan: { min: 100, max: 300 },
             blendMode: 'ADD'
         });
+
+
+        
         
         
     }
 
     update(delta) {
+
 
         if(60 - this.cur_time < 61)
         this.see_delta.text = "Time left:"+ (game.settings.gameTimer/1000 - this.cur_time); 

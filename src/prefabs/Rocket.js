@@ -10,6 +10,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.cur_time = 0;
         this.pas_time = 0;
         this.canFire = true;
+        
 
     }
 
@@ -20,13 +21,18 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
         
         // fire button
-        if(Phaser.Input.Keyboard.JustDown(keyF) && !this.isFiring && this.canFire) {
+        if((Phaser.Input.Keyboard.JustDown(keyF)|| this.scene.input.activePointer.isDown) && !this.isFiring && this.canFire) {
             this.isFiring = true;
             this.canFire = false;
             this.sfxRocket.play();
 
             this.pas_time = this.cur_time;
         }
+
+
+        //fire but mouse
+
+
         if (this.cur_time-this.pas_time>250){
             this.canFire = true;
 
