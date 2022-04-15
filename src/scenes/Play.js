@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('spaceship', './assets/CoreFighter2.png');
+        this.load.image('spaceship2', './assets/corePoint.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('pilot', './assets/pilot.png');
         this.load.image('boom', './assets/boom.png');
@@ -28,7 +29,7 @@ class Play extends Phaser.Scene {
         this.p1Rocket = new Rocket(this, 480,342, 'rocket').setOrigin(0.5, 0);
 
         // add Spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width, 80, 'spaceship', 0, 100).setOrigin(0, 0);
+        this.ship01 = new Spaceship(this, game.config.width, 80, 'spaceship2', 0, 100).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, 80*1.6, 'spaceship', 0, 50).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width + borderUISize*6, 80*2.3, 'spaceship', 0, 10).setOrigin(0,0);
         this.ship01.setScale(0.8);
@@ -108,13 +109,13 @@ class Play extends Phaser.Scene {
         var particles = this.add.particles('boom');
 
         this.emitter = particles.createEmitter({
-            x: 100,
-            y: 100,
+            x: 200,
+            y: 200,
             speed: 400,
             frequency: 100,
             angle: { min: -30, max: 30 },
             quantity: 0,
-            lifespan: { min: 100, max: 300 },
+            lifespan: { min: 100, max: 500 },
             blendMode: 'ADD'
         });
 
@@ -182,14 +183,14 @@ class Play extends Phaser.Scene {
 
         this.emitter.setPosition(ship.x+ship.width/2, ship.y+ship.height/2);
 
-        this.emitter.setQuantity(.1);
+        this.emitter.setQuantity(.5);
         
         this.clock = this.time.delayedCall(500, () => {this.emitter.setQuantity(0);}, null, this);
     
         // temporarily hide ship
         ship.alpha = 0;                         
         // create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0).setScale(.7);
         boom.anims.play('explode');             // play explode animation
         boom.on('animationcomplete', () => {    // callback after anim completes
             ship.reset();                         // reset ship position
