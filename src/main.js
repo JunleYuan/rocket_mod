@@ -1,3 +1,7 @@
+//Made by Junle Yuan.
+//it took more than 15 hours but not sure how much
+//   04/15
+
 let config = {
     type: Phaser.CANVAS,
     width: 640,
