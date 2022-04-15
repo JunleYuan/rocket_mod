@@ -32,7 +32,7 @@ class Menu extends Phaser.Scene {
 
     //text
     this.add.bitmapText(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding - 100, 'bm','Char\'s Revenge',34).setOrigin(0.5);
-    this.add.bitmapText(game.config.width / 2, 180, 'bm','(F) to fire',34).setOrigin(0.5);
+    this.add.bitmapText(game.config.width / 2, 180, 'bm','(F) or mouse click to fire',24).setOrigin(0.5);
 
     //Easy button setting
     let easy_butt = this.add.bitmapText(game.config.width / 2, 250, 'bm','Easy Mode',34).setOrigin(0.5);
