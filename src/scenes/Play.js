@@ -33,7 +33,8 @@ class Play extends Phaser.Scene {
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, 80*1.6, 'spaceship', 0, 50).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width + borderUISize*6, 80*2.3, 'spaceship', 0, 10).setOrigin(0,0);
         this.ship01.setScale(0.8);
-        //this.ship02.setScale(1);
+        this.ship01.moveSpeed = this.ship01.moveSpeed+1;
+        this.ship02.moveSpeed = this.ship02.moveSpeed+.5;
         this.ship03.setScale(1.2);
 
         //pilot screen
@@ -100,7 +101,11 @@ class Play extends Phaser.Scene {
 
         this.clock = this.time.delayedCall(30000, () => {
             
-            game.settings.spaceshipSpeed = game.settings.spaceshipSpeed+2;
+            //game.settings.spaceshipSpeed = game.settings.spaceshipSpeed+2;
+
+            this.ship01.moveSpeed = this.ship01.moveSpeed+2;
+            this.ship02.moveSpeed = this.ship01.moveSpeed+2;
+            this.ship03.moveSpeed = this.ship01.moveSpeed+2;
             
             
 
